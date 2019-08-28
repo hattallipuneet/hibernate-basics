@@ -92,3 +92,26 @@ CREATE TABLE `salaries` (
   `employee_id` int(11) NOT NULL,
   `salary` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Used for mapping SortedMap collection
+-- Table structure for tables `tourist` and `places`
+--
+
+DROP TABLE IF EXISTS `tourist`;
+
+CREATE TABLE `tourist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `places`;
+
+CREATE TABLE `places` (
+  `tourist_id` int(11) NOT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
