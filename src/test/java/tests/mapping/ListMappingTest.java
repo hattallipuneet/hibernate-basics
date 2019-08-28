@@ -19,7 +19,7 @@ public class ListMappingTest {
     @BeforeClass
     public static void init() {
         System.out.println("Initialized ");
-        sessionFactory = new Configuration().configure("hibernate/hibernate-professor-tracker-cfg.xml")
+        sessionFactory = new Configuration().configure("hibernate/hibernate-learning-tracker-cfg.xml")
                 .addAnnotatedClass(Professor.class)
                 .buildSessionFactory();
 
@@ -31,13 +31,12 @@ public class ListMappingTest {
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession();) {
             Professor professor = new Professor("Ross", "Geller", "dr_geller@friend.com");
-            List<String> images = professor.getImages();
-
-            images.add("photo1.jpg");
-            images.add("photo2.jpg");
-            images.add("photo3.jpg");
-            images.add("photo4.jpg");
-            images.add("photo5.jpg");
+            List<String> courses = professor.getCourses();
+            courses.add("A101");
+            courses.add("A102");
+            courses.add("B102");
+            courses.add("C101");
+            courses.add("D101");
 
             transaction = session.beginTransaction();
             session.persist(professor);

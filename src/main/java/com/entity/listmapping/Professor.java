@@ -1,6 +1,14 @@
 package com.entity.listmapping;
 
-import javax.persistence.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +31,10 @@ public class Professor {
     private String email;
 
     @ElementCollection
-    @CollectionTable(name = "image")
-    @OrderColumn
-    @Column(name = "file_name")
-    private List<String> images = new ArrayList<>();
+    @CollectionTable(name = "course")
+    @Column(name = "course_name")
+    @OrderColumn(name = "courses_order")
+    private List<String> courses = new ArrayList<>();
 
     public Professor(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -66,11 +74,11 @@ public class Professor {
         this.email = email;
     }
 
-    public List<String> getImages() {
-        return images;
+    public List<String> getCourses() {
+        return courses;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setCourses(List<String> courses) {
+        this.courses = courses;
     }
 }
