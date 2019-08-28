@@ -1,7 +1,6 @@
-package mapping.valuetype;
+package tests.mapping;
 
-
-import com.entity.setmapping.Student;
+import com.entity.mapmapping.StockHolder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,39 +10,39 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.AbstractMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class SetMappingTest {
+public class MapMappingTest {
 
     private static SessionFactory sessionFactory;
 
     @BeforeClass
     public static void init() {
-        System.out.println("Initialized ");
-        sessionFactory = new Configuration().configure("hibernate/hibernate-student-tracker-cfg.xml")
-                                            .addAnnotatedClass(Student.class)
+        sessionFactory = new Configuration().configure("hibernate/hibernate-stock-tracker-cfg.xml")
+                                            .addAnnotatedClass(StockHolder.class)
                                             .buildSessionFactory();
-
     }
 
     @Test
     public void test_Insert() {
-
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession();) {
-            Student student = new Student("Ross", "Geller", "dr_geller@friend.com");
-            Set<String> images = student.getImages();
 
-            images.add("photo1.jpg");
-            images.add("photo2.jpg");
-            images.add("photo3.jpg");
-            images.add("photo4.jpg");
-            images.add("photo5.jpg");
+            Map<String, String> assets = Stream.of(
+                    new AbstractMap.SimpleEntry<>("GOOG", "Google"),
+                    new AbstractMap.SimpleEntry<>("APPL", "Apple"),
+                    new AbstractMap.SimpleEntry<>("MSFT", "Micosoft")
+            ).collect(Collectors.toMap(Map.Entry::getKey,
+                                        Map.Entry::getValue));
 
+            StockHolder stockHolder = new StockHolder("Monica", "Geller");
+            stockHolder.setAssets(assets);
             transaction = session.beginTransaction();
-            session.persist(student);
+            session.persist(stockHolder);
             transaction.commit();
-
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -58,5 +57,4 @@ public class SetMappingTest {
             sessionFactory.close();
         }
     }
-
 }

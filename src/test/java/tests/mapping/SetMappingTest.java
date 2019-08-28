@@ -1,6 +1,7 @@
-package mapping.valuetype;
+package tests.mapping;
 
-import com.entity.listmapping.Professor;
+
+import com.entity.setmapping.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,18 +11,18 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Set;
 
-public class ListMappingTest {
+public class SetMappingTest {
 
     private static SessionFactory sessionFactory;
 
     @BeforeClass
     public static void init() {
         System.out.println("Initialized ");
-        sessionFactory = new Configuration().configure("hibernate/hibernate-professor-tracker-cfg.xml")
-                .addAnnotatedClass(Professor.class)
-                .buildSessionFactory();
+        sessionFactory = new Configuration().configure("hibernate/hibernate-student-tracker-cfg.xml")
+                                            .addAnnotatedClass(Student.class)
+                                            .buildSessionFactory();
 
     }
 
@@ -30,8 +31,8 @@ public class ListMappingTest {
 
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession();) {
-            Professor professor = new Professor("Ross", "Geller", "dr_geller@friend.com");
-            List<String> images = professor.getImages();
+            Student student = new Student("Ross", "Geller", "dr_geller@friend.com");
+            Set<String> images = student.getImages();
 
             images.add("photo1.jpg");
             images.add("photo2.jpg");
@@ -40,7 +41,7 @@ public class ListMappingTest {
             images.add("photo5.jpg");
 
             transaction = session.beginTransaction();
-            session.persist(professor);
+            session.persist(student);
             transaction.commit();
 
         } catch (Exception e) {
@@ -57,4 +58,5 @@ public class ListMappingTest {
             sessionFactory.close();
         }
     }
+
 }
