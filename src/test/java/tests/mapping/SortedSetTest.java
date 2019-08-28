@@ -1,6 +1,6 @@
 package tests.mapping;
 
-import com.entity.sortedmapping.Employee;
+import com.entity.sorted.setmapping.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
