@@ -20,7 +20,7 @@ public class SetMappingTest {
     @BeforeClass
     public static void init() {
         System.out.println("Initialized ");
-        sessionFactory = new Configuration().configure("hibernate/hibernate-learning-tracker-cfg.xml")
+        sessionFactory = new Configuration().configure("hibernate/hibernate-learning-elementcollection-tracker-cfg.xml")
                                             .addAnnotatedClass(Student.class)
                                             .buildSessionFactory();
 

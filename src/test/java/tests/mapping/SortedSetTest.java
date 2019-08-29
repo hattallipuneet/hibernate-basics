@@ -21,7 +21,7 @@ public class SortedSetTest {
 
     @BeforeClass
     public static void init() {
-        sessionFactory = new Configuration().configure("hibernate/hibernate-learning-tracker-cfg.xml")
+        sessionFactory = new Configuration().configure("hibernate/hibernate-learning-elementcollection-tracker-cfg.xml")
                                             .addAnnotatedClass(Employee.class)
                                             .buildSessionFactory();
     }

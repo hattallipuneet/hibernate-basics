@@ -21,7 +21,7 @@ public class MapMappingTest {
 
     @BeforeClass
     public static void init() {
-        sessionFactory = new Configuration().configure("hibernate/hibernate-learning-tracker-cfg.xml")
+        sessionFactory = new Configuration().configure("hibernate/hibernate-learning-elementcollection-tracker-cfg.xml")
                                             .addAnnotatedClass(StockHolder.class)
                                             .buildSessionFactory();
     }
