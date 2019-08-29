@@ -1,7 +1,7 @@
 package tests.embedded;
 
+import com.demo.valuetype.embedded.Company;
 import com.demo.valuetype.embedded.Contact;
-import com.demo.valuetype.embedded.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,40 +11,39 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class UserContactEmbeddedTest {
+public class CompanyContactAttributeOverrideTest {
 
     private static SessionFactory sessionFactory;
 
     @BeforeClass
     public static void init() {
         sessionFactory = new Configuration()
-                .configure("hibernate/hibernate-learning-embedded-tracker-cfg.xml")
-                .addAnnotatedClass(User.class)
-                .buildSessionFactory();
+                                    .configure("hibernate/hibernate-learning-embedded-tracker-cfg.xml")
+                                    .addAnnotatedClass(Company.class)
+                                    .buildSessionFactory();
     }
 
     @Test
-    public  void test_EmbeddedInsert() {
+    public void test_AttributeOverride_Insert() {
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession()) {
 
-            User user = new User();
-            user.setFirstName("Rachel");
-            user.setLastName("Greene");
+            Company company = new Company();
+            company.setCompanyName("Google");
+            company.setOrganization("Alphabet");
 
             Contact contact = new Contact();
-            contact.setEmail("evergreenrachel@friends.com");
-            contact.setHouseNumber("111");
-            contact.setStreet("Main Avenue");
-            contact.setCity("New York");
-            contact.setState("New York");
+            contact.setHouseNumber("1600");
+            contact.setStreet("Amphitheatre Parkway");
+            contact.setCity("Mountain View");
+            contact.setState("California");
             contact.setCountry("US");
-            contact.setZipCode("10453");
+            contact.setZipCode("94043");
+            contact.setEmail("google@gmail.com");
 
-            user.setContact(contact);
-
+            company.setContact(contact);
             transaction = session.beginTransaction();
-            session.persist(user);
+            session.persist(company);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -52,7 +51,6 @@ public class UserContactEmbeddedTest {
             }
             Assert.fail(e.getMessage());
         }
-
     }
 
     @AfterClass
