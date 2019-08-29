@@ -1,6 +1,6 @@
 package tests.mapping;
 
-import com.demo.valuetype.listmapping.Professor;
+import com.demo.valuetype.elementcollection.listmapping.Professor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

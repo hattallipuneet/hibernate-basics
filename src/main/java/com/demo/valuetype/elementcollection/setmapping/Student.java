@@ -1,4 +1,4 @@
-package com.demo.valuetype.setmapping;
+package com.demo.valuetype.elementcollection.setmapping;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;

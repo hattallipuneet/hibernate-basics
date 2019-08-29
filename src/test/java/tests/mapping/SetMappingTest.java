@@ -1,7 +1,7 @@
 package tests.mapping;
 
 
-import com.demo.valuetype.setmapping.Student;
+import com.demo.valuetype.elementcollection.setmapping.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

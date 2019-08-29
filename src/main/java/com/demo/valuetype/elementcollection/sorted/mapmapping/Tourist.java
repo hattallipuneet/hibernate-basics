@@ -1,4 +1,4 @@
-package com.demo.valuetype.sorted.mapmapping;
+package com.demo.valuetype.elementcollection.sorted.mapmapping;
 
 import org.hibernate.annotations.SortComparator;
 
