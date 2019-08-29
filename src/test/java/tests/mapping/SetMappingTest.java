@@ -1,7 +1,7 @@
 package tests.mapping;
 
 
-import com.entity.setmapping.Student;
+import com.demo.entity.setmapping.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

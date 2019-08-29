@@ -1,6 +1,6 @@
 package tests.mapping;
 
-import com.entity.sorted.mapmapping.Tourist;
+import com.demo.entity.sorted.mapmapping.Tourist;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,7 +10,6 @@ import org.junit.*;
 import java.util.AbstractMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

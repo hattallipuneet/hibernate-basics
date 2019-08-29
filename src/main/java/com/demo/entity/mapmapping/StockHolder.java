@@ -1,4 +1,4 @@
-package com.entity.mapmapping;
+package com.demo.entity.mapmapping;
 
 import javax.persistence.*;
 import java.util.Map;

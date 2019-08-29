@@ -1,4 +1,4 @@
-package com.entity.listmapping;
+package com.demo.entity.setmapping;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -7,14 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OrderColumn;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "professor")
-public class Professor {
+@Table(name = "student")
+public class Student {
 
     @Column(name = "id")
     @Id
@@ -31,12 +31,12 @@ public class Professor {
     private String email;
 
     @ElementCollection
-    @CollectionTable(name = "course")
-    @Column(name = "course_name")
-    @OrderColumn(name = "courses_order")
-    private List<String> courses = new ArrayList<>();
+    @CollectionTable(name = "image",
+            joinColumns = @JoinColumn(name = "student_id"))
+    @Column(name = "file_name")
+    private Set<String> images = new HashSet<>();
 
-    public Professor(String firstName, String lastName, String email) {
+    public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -74,11 +74,22 @@ public class Professor {
         this.email = email;
     }
 
-    public List<String> getCourses() {
-        return courses;
+    public Set<String> getImages() {
+        return images;
     }
 
-    public void setCourses(List<String> courses) {
-        this.courses = courses;
+    public void setImages(Set<String> images) {
+        this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", images=" + images +
+                '}';
     }
 }
