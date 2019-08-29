@@ -1,4 +1,4 @@
-package com.demo.entity.sorted.setmapping;
+package com.demo.valuetype.sorted.setmapping;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;

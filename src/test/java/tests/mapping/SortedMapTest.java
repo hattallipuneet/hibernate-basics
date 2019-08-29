@@ -1,6 +1,6 @@
 package tests.mapping;
 
-import com.demo.entity.sorted.mapmapping.Tourist;
+import com.demo.valuetype.sorted.mapmapping.Tourist;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

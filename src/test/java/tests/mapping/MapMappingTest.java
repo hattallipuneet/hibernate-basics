@@ -1,6 +1,6 @@
 package tests.mapping;
 
-import com.demo.entity.mapmapping.StockHolder;
+import com.demo.valuetype.mapmapping.StockHolder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
