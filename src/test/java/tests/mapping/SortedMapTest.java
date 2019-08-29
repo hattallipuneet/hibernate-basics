@@ -56,6 +56,7 @@ public class SortedMapTest {
         try (Session session = sessionFactory.getCurrentSession()){
             session.beginTransaction();
             Tourist tourist = session.get(Tourist.class, 102);
+            System.out.println(tourist.getPlaces().getClass().getName());
             tourist.getPlaces()
                     .forEach((s1, s2) -> System.out.println(String.format("%s-%s", s1, s2)));
             session.getTransaction().commit();
