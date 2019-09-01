@@ -1,4 +1,4 @@
-package tests.mapping;
+package tests.collectionmapping;
 
 import com.demo.valuetype.elementcollection.sorted.setmapping.Employee;
 import org.hibernate.Session;

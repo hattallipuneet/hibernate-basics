@@ -1,6 +1,7 @@
-package tests.mapping;
+package tests.collectionmapping;
 
-import com.demo.valuetype.elementcollection.listmapping.Professor;
+
+import com.demo.valuetype.elementcollection.setmapping.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,9 +11,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Set;
 
-public class ListMappingTest {
+public class SetMappingTest {
 
     private static SessionFactory sessionFactory;
 
@@ -20,8 +21,8 @@ public class ListMappingTest {
     public static void init() {
         System.out.println("Initialized ");
         sessionFactory = new Configuration().configure("hibernate/hibernate-learning-elementcollection-tracker-cfg.xml")
-                .addAnnotatedClass(Professor.class)
-                .buildSessionFactory();
+                                            .addAnnotatedClass(Student.class)
+                                            .buildSessionFactory();
 
     }
 
@@ -30,16 +31,17 @@ public class ListMappingTest {
 
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession();) {
-            Professor professor = new Professor("Ross", "Geller", "dr_geller@friend.com");
-            List<String> courses = professor.getCourses();
-            courses.add("A101");
-            courses.add("A102");
-            courses.add("B102");
-            courses.add("C101");
-            courses.add("D101");
+            Student student = new Student("Ross", "Geller", "dr_geller@friend.com");
+            Set<String> images = student.getImages();
+
+            images.add("photo1.jpg");
+            images.add("photo2.jpg");
+            images.add("photo3.jpg");
+            images.add("photo4.jpg");
+            images.add("photo5.jpg");
 
             transaction = session.beginTransaction();
-            session.persist(professor);
+            session.persist(student);
             transaction.commit();
 
         } catch (Exception e) {
@@ -56,4 +58,5 @@ public class ListMappingTest {
             sessionFactory.close();
         }
     }
+
 }

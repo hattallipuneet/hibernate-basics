@@ -1,6 +1,6 @@
-package tests.mapping;
+package tests.collectionmapping;
 
-import com.demo.valuetype.elementcollection.mapmapping.StockHolder;
+import com.demo.valuetype.elementcollection.listmapping.Professor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,39 +10,38 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.AbstractMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.List;
 
-public class MapMappingTest {
+public class ListMappingTest {
 
     private static SessionFactory sessionFactory;
 
     @BeforeClass
     public static void init() {
+        System.out.println("Initialized ");
         sessionFactory = new Configuration().configure("hibernate/hibernate-learning-elementcollection-tracker-cfg.xml")
-                                            .addAnnotatedClass(StockHolder.class)
-                                            .buildSessionFactory();
+                .addAnnotatedClass(Professor.class)
+                .buildSessionFactory();
+
     }
 
     @Test
     public void test_Insert() {
+
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession();) {
+            Professor professor = new Professor("Ross", "Geller", "dr_geller@friend.com");
+            List<String> courses = professor.getCourses();
+            courses.add("A101");
+            courses.add("A102");
+            courses.add("B102");
+            courses.add("C101");
+            courses.add("D101");
 
-            Map<String, String> assets = Stream.of(
-                    new AbstractMap.SimpleEntry<>("GOOG", "Google"),
-                    new AbstractMap.SimpleEntry<>("APPL", "Apple"),
-                    new AbstractMap.SimpleEntry<>("MSFT", "Micosoft")
-            ).collect(Collectors.toMap(Map.Entry::getKey,
-                                        Map.Entry::getValue));
-
-            StockHolder stockHolder = new StockHolder("Monica", "Geller");
-            stockHolder.setAssets(assets);
             transaction = session.beginTransaction();
-            session.persist(stockHolder);
+            session.persist(professor);
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
