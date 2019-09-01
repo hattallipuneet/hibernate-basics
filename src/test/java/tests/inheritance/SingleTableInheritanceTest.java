@@ -14,8 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SingleTableInheritanceTest {
@@ -38,13 +37,13 @@ public class SingleTableInheritanceTest {
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession();) {
             DebitAccount debitAccount = new DebitAccount();
-            debitAccount.setOwner( "John Doe" );
+            debitAccount.setOwner( "Dwight Schrute" );
             debitAccount.setBalance( BigDecimal.valueOf( 100 ) );
             debitAccount.setInterestRate( BigDecimal.valueOf( 1.5d ) );
             debitAccount.setOverDraftFee( BigDecimal.valueOf( 25 ) );
 
             CreditAccount creditAccount = new CreditAccount();
-            creditAccount.setOwner( "John Doe" );
+            creditAccount.setOwner( "Dwight Schrute" );
             creditAccount.setBalance( BigDecimal.valueOf( 1000 ) );
             creditAccount.setInterestRate( BigDecimal.valueOf( 1.9d ) );
             creditAccount.setCreditLimit( BigDecimal.valueOf( 5000 ) );
@@ -68,13 +67,13 @@ public class SingleTableInheritanceTest {
         Transaction transaction = null;
         try(Session session = sessionFactory.getCurrentSession();) {
             DebitAccount debitAccount = new DebitAccount();
-            debitAccount.setOwner( "John Doe" );
+            debitAccount.setOwner( "Michael Scott" );
             debitAccount.setBalance( BigDecimal.valueOf( 2000 ) );
             debitAccount.setInterestRate( BigDecimal.valueOf( 1.7d ) );
             debitAccount.setOverDraftFee( BigDecimal.valueOf( 45 ) );
 
             CreditAccount creditAccount = new CreditAccount();
-            creditAccount.setOwner( "John Doe" );
+            creditAccount.setOwner( "Michael Scott" );
             creditAccount.setBalance( BigDecimal.valueOf( 3000 ) );
             creditAccount.setInterestRate( BigDecimal.valueOf( 2.9d ) );
             creditAccount.setCreditLimit( BigDecimal.valueOf( 1200 ) );
@@ -106,6 +105,18 @@ public class SingleTableInheritanceTest {
             accountTypeMap.forEach((accountType, accList) -> {
                 System.out.println(String.format("There are %d %s accounts", accList.size(), accountType));
             });
+
+            Map<String, List<Account>> mapByName = accounts.stream()
+                                                            .collect(Collectors.groupingBy(
+                                                                    Account::getOwner,
+                                                                    LinkedHashMap::new,
+                                                                    Collectors.toList()
+                                                            ));
+
+            mapByName.forEach((owner, accountList) ->{
+                System.out.println(String.format("%s has %d accounts", owner, accountList.size()));
+            });
+
 
         } catch (Exception e) {
             Assert.fail(e.getMessage());
